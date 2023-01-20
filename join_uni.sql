@@ -2,14 +2,14 @@
 SELECT `students`.*
 FROM `students`
   JOIN `degrees`
-    ON `students`.`degree_id` = `degrees`.`id`
+    ON `degrees`.`id` = `students`.`degree_id`
 WHERE `degrees`.`name` LIKE 'Corso di Laurea in Economia';
 
 -- -- 2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
 SELECT * 
 FROM `degrees`
   JOIN `departments`
-    ON `degrees`.`department_id` = `departments`.`id`
+    ON `departments`.`id` = `degrees`.`department_id`
 WHERE `degrees`.`level` LIKE 'magistrale'
 AND `departments`.`name` LIKE 'Dipartimento di Neuroscienze';
 
@@ -17,19 +17,19 @@ AND `departments`.`name` LIKE 'Dipartimento di Neuroscienze';
 SELECT `teachers`.`name`,`teachers`.`surname`,`courses`.*
 FROM `teachers`
   JOIN `course_teacher`
-    ON `course_teacher`.`teacher_id` = `teachers`.`id`  
+    ON `teachers`.`id` = `course_teacher`.`teacher_id`  
   JOIN `courses`
-    ON `course_teacher`.`course_id` = `courses`.`id`
+    ON `courses`.`id` = `course_teacher`.`course_id`
 WHERE `teachers`.`id` = 44;
 
 
 -- 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
-SELECT * 
+SELECT `students`.* 
 FROM `students`
   JOIN `degrees`
-    ON `students`.`degree_id` = `degrees`.`id`
+    ON `degrees`.`id` = `students`.`degree_id`
   JOIN `departments`
-    ON `degrees`.`department_id` = `departments`.`id`
+    ON `departments`.`id` = `degrees`.`department_id`
 ORDER BY `students`.`surname`,`students`.`name`;
 
 -- 5. BONUS: Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
